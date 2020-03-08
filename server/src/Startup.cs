@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 
 namespace server
 {
     public class Startup
     {
-        public void Configure(IConfiguration configuration, IApplicationBuilder app, IHostingEnvironment environment)
+        public void Configure(IConfiguration configuration, IApplicationBuilder app, IWebHostEnvironment environment)
         {
             if (environment.IsDevelopment())
             {
@@ -28,18 +21,18 @@ namespace server
             ConfigureServices(app, environment);
         }
 
-        private void ConfigureDevelopmentServices(IApplicationBuilder app, IHostingEnvironment environment)
+        private void ConfigureDevelopmentServices(IApplicationBuilder app, IWebHostEnvironment environment)
         {
             app.UseDeveloperExceptionPage();
         }
 
-        private void ConfigureProductionServices(IApplicationBuilder app, IHostingEnvironment environment)
+        private void ConfigureProductionServices(IApplicationBuilder app, IWebHostEnvironment environment)
         {
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
 
-        private void ConfigureServices(IApplicationBuilder app, IHostingEnvironment environment)
+        private void ConfigureServices(IApplicationBuilder app, IWebHostEnvironment environment)
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();

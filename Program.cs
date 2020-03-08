@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace server
 {
@@ -24,7 +19,7 @@ namespace server
                 .UseStartup<Startup>();
         }
 
-        public static void ConfigureConfiguration(IHostingEnvironment environment, IConfigurationBuilder config)
+        public static void ConfigureConfiguration(IWebHostEnvironment environment, IConfigurationBuilder config)
         {
             config.SetBasePath(environment.ContentRootPath);
             config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
