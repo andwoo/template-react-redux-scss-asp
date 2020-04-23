@@ -2,13 +2,26 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace server
 {
     public class Startup
     {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddRazorPages();
+            services.AddSignalR();
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+            });
+        }
+
         public void Configure(IConfiguration configuration, IApplicationBuilder app, IWebHostEnvironment environment)
         {
+            ConfigureServices(app, environment);
+
             if (environment.IsDevelopment())
             {
                 ConfigureDevelopmentServices(app, environment);
@@ -17,17 +30,17 @@ namespace server
             {
                 ConfigureProductionServices(app, environment);
             }
-
-            ConfigureServices(app, environment);
         }
 
         private void ConfigureDevelopmentServices(IApplicationBuilder app, IWebHostEnvironment environment)
         {
+            app.UseHttpsRedirection();
             app.UseDeveloperExceptionPage();
         }
 
         private void ConfigureProductionServices(IApplicationBuilder app, IWebHostEnvironment environment)
         {
+            app.UseHttpsRedirection();
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
@@ -36,6 +49,7 @@ namespace server
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseRouting();
         }
     }
 }
