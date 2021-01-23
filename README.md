@@ -1,3 +1,10 @@
+# ⚠️ Deprecated ⚠️
+This template is no longer maintained. I haven't used this template personally for a long time and decided to focus on maintaining my two primarily used templates. Please consider choosing one of these for your project:
+- [template-react-scss](https://github.com/andwoo/template-react-scss)
+- [template-vanilla-scss](https://github.com/andwoo/template-vanilla-scss)
+
+---
+
 # Build Instructions
 1. Install C# dependencies with command `dotnet restore` in the root directory.
 2. Install client dependencies with command `yarn` in the client directory.
